@@ -8,7 +8,7 @@ const loadingScreen = document.querySelector(".loading-screen");
 const userInfoContainer = document.querySelector(".user-info-container");
 const cityfound = document.querySelector(".citynotfound");
 
-// initially variable need
+
 
 let oldTab = userTab;
 const API_KEY = "d1845658f92b31c64bd94f06f7188c9c";
@@ -25,19 +25,15 @@ getfromSessionStorage();
 
         if(!searchForm.classList.contains("active"))
         {
-           //kya search form wala conatainer is invisible if yes then make it visible
            userInfoContainer.classList.remove("active");
            grantAccess.classList.remove("active");
            searchForm.classList.add("active");
         }
         else{
-    
-            //main phele search wale tab par tha ab your weather tab visible karna hai 
+
             searchForm.classList.remove("active");
             userInfoContainer.classList.add("active");
-    
-            //ab main your weather tab me aagya hu to weather bhi display karna padega so lets checklocal storage first 
-            //for coordibates if we have saved them there 
+
             getfromSessionStorage();
         }
     }
@@ -56,25 +52,15 @@ searchTab.addEventListener("click", ()=>{
 });
 
 
-
-
-
-
-
-
-
 function getfromSessionStorage()
 {
     const localcoordinates = sessionStorage.getItem("user-coordinates");
     
     if(!localcoordinates){
-
-        // agar local coordinates nhi mile 
         grantAccess.classList.add("active");
     }
     else
-    {
-    
+    {  
         const coordinates = JSON.parse(localcoordinates);
         fetchUserWeatherInfo(coordinates);
         
@@ -144,7 +130,7 @@ function getlocation(){
         navigator.geolocation.getCurrentPosition(showPosition);
    }
    else{
-         //HW show an alert for no geolocation support available 
+         alert("Goelocation is not supported");
    }
 }
 
@@ -218,7 +204,7 @@ async function fetchSearchWeatherInfo(city) {
         }
 
     } catch (err) {
-        // Handle fetch or JSON parsing error (e.g., show an error message)
+     
         console.error("Error:", err.message);
         loadingScreen.classList.remove("active");
     }
